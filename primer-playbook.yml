@@ -1,0 +1,9 @@
+
+---
+- name: Mi primer playbook
+  hosts: localhost
+  tasks:
+    - name: Mostrar un mensaje
+      debug:
+        msg: "¡Hola! Ansible está funcionando 🚀"
+
