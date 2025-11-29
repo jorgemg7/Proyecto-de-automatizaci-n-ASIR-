@@ -9,6 +9,8 @@ COPY www/ /usr/local/apache2/htdocs/
 # Permisos para usuario nobody
 RUN chown -R nobody:nogroup /usr/local/apache2/htdocs \
     && chmod -R 755 /usr/local/apache2/htdocs
+RUN mkdir -p /usr/local/apache2/logs \
+    && chown -R www-data:www-data /usr/local/apache2/logs
 
 EXPOSE 8080
 

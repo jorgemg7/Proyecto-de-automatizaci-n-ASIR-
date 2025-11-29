@@ -26,10 +26,11 @@ jobs:
         run: docker build -t ghcr.io/jorgemg7/proyecto-asir-apache:latest ./app
 
       # 4. Ejecutar contenedor y probar
-      - name: Run container to test
+      - name: Test container
         run: |
           docker run -d --name apache-test -p 8080:80 ghcr.io/jorgemg7/proyecto-asir-apache:latest
-          sleep 10
+          echo "Esperando a que arranque apache..."
+          sleep 20
           curl -f http://localhost:8080
           docker stop apache-test
           docker rm apache-test
