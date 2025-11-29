@@ -1,0 +1,12 @@
+version: "3.8"
+services:
+  web:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    container_name: apache-dev
+    ports:
+      - "8000:8080"   # Accede en http://localhost:8000
+    volumes:
+      - ./app/www:/usr/local/apache2/htdocs:ro
+    restart: unless-stopped

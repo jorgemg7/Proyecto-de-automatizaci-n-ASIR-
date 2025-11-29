@@ -1,0 +1,40 @@
+name: CI/CD - Apache Docker
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. Clonar repositorio
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      # 2. Login en GitHub Container Registry
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.GHCR_USERNAME }}
+          password: ${{ secrets.GHCR_TOKEN }}
+          registry: ghcr.io
+
+      # 3. Construir imagen Docker
+      - name: Build Docker image
+        run: docker build -t ghcr.io/jorgemg7/proyecto-asir-apache:latest ./app
+
+      # 4. Ejecutar contenedor y probar
+      - name: Run container to test
+        run: |
+          docker run -d --name apache-test -p 8080:80 ghcr.io/jorgemg7/proyecto-asir-apache:latest
+          sleep 5
+          curl -f http://localhost:8080
+          docker stop apache-test
+          docker rm apache-test
+
+      # 5. Subir imagen al GitHub Container Registry
+      - name: Push to GitHub Container Registry
+        run: docker push ghcr.io/jorgemg7/proyecto-asir-apache:latest
+
