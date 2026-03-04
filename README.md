@@ -24,3 +24,21 @@ Este proyecto es una **aplicación web sencilla en Flask**, desplegada en **AWS 
 ---
 
 ## 📂 Estructura del proyecto
+
+mi-app-aws1/
+│
+├─ app.py # Código principal de Flask
+├─ requirements.txt # Dependencias Python
+├─ Dockerfile # Contenerización de la app
+├─ README.md # Documentación del proyecto
+└─ .gitignore # Archivos ignorados por Git
+
+---
+
+## ⚡ Instalación y ejecución local
+
+1. Clona el repositorio:
+
+```bash
+git clone https://github.com/tu-usuario/mi-app-aws1.git
+cd mi-app-aws1
